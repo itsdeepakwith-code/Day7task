@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Countries with USD</h1>
+    <script>
+      var request = new XMLHttpRequest();
+
+      request.open("GET", "https://restcountries.com/v2/all");
+
+      request.send();
+
+      request.onload = function () {
+        var result = JSON.parse(request.response);
+
+        var countriesWithUSD = [];
+
+        result.forEach(function (country) {
+          for (var i = 0; i < country.currencies.length; i++) {
+            if (country.currencies[i].code === "USD") {
+              countriesWithUSD.push(country.name);
+              break;
+            }
+          }
+        });
+
+        console.log("Countries that use US dollars:");
+        countriesWithUSD.forEach(function (country) {
+          console.log(" - " + country);
+        });
+      };
+    </script>
+  </body>
+</html>

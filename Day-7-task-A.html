@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AsianCountries</title>
+  </head>
+  <body>
+    <h1>Asian Countries</h1>
+    <script>
+      var request = new XMLHttpRequest();
+
+      request.open("GET", "https://restcountries.com/v2/all");
+
+      request.send();
+
+      request.onload = function () {
+        var result = JSON.parse(request.response);
+
+        var asianCountries = result.filter(function (country) {
+          return country.region == "Asia";
+        });
+        console.log(asianCountries);
+      };
+    </script>
+  </body>
+</html>
